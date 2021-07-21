@@ -1,4 +1,5 @@
-// Node class for linked list node creation
+// Node class for double linked list 
+// node
 class node{
   constructor(value){
     this.value = value;
@@ -70,27 +71,27 @@ class double_linked_list{
   }
   traverse_to_index(index){
     let i=0;
-    let cur_n=this.head;
+    let cn=this.head;
     while(i!==index){
-      cur_n=cur_n.next;
+      cn=cn.next;
       i++;
     }
-    return cur_n;
+    return cn;
   }
   // Traverse ll and print each node value
-  print(){
+  print_rev(){
     let val_array = [];
     for(let i=0,cn=this.tail; cn!=null; i++,cn=cn.prev){
       val_array[i] = cn.value;
     }
-    console.log("F: "+val_array);
+    console.log("R: "+val_array);
   }
-  print_rev(){
+  print(){
     let val_array = [];
     for(let i=0,cn=this.head; cn!=null; i++,cn=cn.next){
       val_array[i] = cn.value;
     }
-    console.log("R: "+val_array);
+    console.log("F: "+val_array);
   }
 };
 
