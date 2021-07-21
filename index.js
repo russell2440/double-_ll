@@ -51,16 +51,21 @@ class double_linked_list{
     }
     // create new node, traverse to leader,
     // patch in new node.
-    let nn = new node(value);
     let leadn = this.traverse_to_index(index-1);
+    let nn = new node(value);
     nn.next = leadn.next;
+    nn.prev = leadn;
+    nn.next.prev = nn;
     leadn.next = nn;
     this.length++;
   }
   remove(index){
     let leadn = this.traverse_to_index(index-1);
-    let targn = leadn.next;
-    leadn.next=targn.next;
+    let rmn = leadn.next;
+    leadn.next=rmn.next;
+    if(leadn.next){
+      leadn.next.prev = leadn;
+    }
     this.length--;
   }
   traverse_to_index(index){
@@ -75,34 +80,52 @@ class double_linked_list{
   // Traverse ll and print each node value
   print(){
     let val_array = [];
+    for(let i=0,cn=this.tail; cn!=null; i++,cn=cn.prev){
+      val_array[i] = cn.value;
+    }
+    console.log("F: "+val_array);
+  }
+  print_rev(){
+    let val_array = [];
     for(let i=0,cn=this.head; cn!=null; i++,cn=cn.next){
       val_array[i] = cn.value;
     }
-    console.log(val_array);
+    console.log("R: "+val_array);
   }
 };
 
 let dll = new double_linked_list(10);
 console.log(dll);
 dll.print();
+dll.print_rev();
 dll.append(15);
 console.log(dll);
 dll.print();
+dll.print_rev();
 dll.append(16);
 console.log(dll);
 dll.print();
+dll.print_rev();
 dll.prepend(1);
 console.log(dll);
 dll.print();
+dll.print_rev();
 dll.insert(2,99)
 dll.print();
+dll.print_rev();
 dll.insert(1,98)
 dll.print();
+dll.print_rev();
 dll.insert(0,97)
 dll.print();
+dll.print_rev();
 dll.insert(100,96)
 dll.print();
+dll.print_rev();
 dll.remove(2);
 dll.print();
+dll.print_rev();
 dll.remove(2);
 dll.print();
+dll.print_rev();
+
