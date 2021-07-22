@@ -53,10 +53,11 @@ class double_linked_list{
     // create new node, traverse to leader,
     // patch in new node.
     let leadn = this.traverse_to_index(index-1);
+    let follown = leadn.next;
     let nn = new node(value);
-    nn.next = leadn.next;
+    nn.next = follown;
     nn.prev = leadn;
-    nn.next.prev = nn;
+    follown.prev = nn;
     leadn.next = nn;
     this.length++;
   }
@@ -126,6 +127,16 @@ dll.print_rev();
 dll.remove(2);
 dll.print();
 dll.print_rev();
+dll.remove(2);
+dll.print();
+dll.print_rev();
+
+setTimeout(()=>{
+    dll.print();
+    dll.print_rev();
+},2000);
+console.log('set timer')
+
 dll.remove(2);
 dll.print();
 dll.print_rev();
